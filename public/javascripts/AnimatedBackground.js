@@ -1,3 +1,12 @@
+function randomColor (alpha) {
+  const colors = ['40, 192, 198', '247, 55, 120']
+  return colors[Math.round((Math.random() * (1 - 2) + 1))]
+}
+
+function applyAlpha (color, alpha) {
+  return 'rgba(' + color + ',' + alpha + ')'
+}
+
 function Ball (type = 'random', canvasWidth, canvasHeight) {
   this.x = 0
   this.y = 0
@@ -9,6 +18,7 @@ function Ball (type = 'random', canvasWidth, canvasHeight) {
   this.color = [207, 255, 4]
   this.R = 2
   this.type = type
+  this.color = randomColor()
 
   const min = -1
   const max = 1
@@ -87,15 +97,10 @@ function Balls (canvasHeight, canvasWidth, ctx) {
   this.list = []
   this.alphaF = 0.03
 
-  function randomColor (alpha) {
-    const colors = ['40, 192, 198', '247, 55, 120']
-    return 'rgba(' + (colors[Math.round((Math.random() * (1 - 2) + 1))]) + ',' + alpha + ')'
-  }
-
   this.renderBalls = () => {
     this.list.forEach((ball) => {
       if (ball.type === 'random') {
-        ctx.fillStyle = randomColor(ball.alpha)
+        ctx.fillStyle = applyAlpha(ball.color, 0)
         ctx.beginPath()
         ctx.arc(ball.x, ball.y, ball.R, 0, Math.PI * 2, true)
         ctx.closePath()
@@ -143,11 +148,6 @@ function Lines (balls, ctx) {
     return Math.sqrt(deltaX * deltaX + deltaY * deltaY)
   }
 
-  function randomColor (alpha) {
-    const colors = ['40, 192, 198', '247, 55, 120']
-    return 'rgba(' + (colors[Math.round((Math.random() * (1 - 2) + 1))]) + ',' + alpha + ')'
-  }
-
   this.renderLines = () => {
     let fraction, alpha
 
@@ -157,7 +157,7 @@ function Lines (balls, ctx) {
 
         if (fraction < 1) {
           alpha = (1 - fraction).toString()
-          ctx.strokeStyle = randomColor(alpha)
+          ctx.strokeStyle = applyAlpha(balls[i].color, alpha)
           ctx.lineWidth = linkLineWidth
           ctx.beginPath()
           ctx.moveTo(balls[i].x, balls[i].y)

@@ -32,7 +32,7 @@ a {
   font-size: 1.5rem; }
 
 .column {
-  flex: 1; }
+  align-items: center; }
 
 .section {
   flex: 1;

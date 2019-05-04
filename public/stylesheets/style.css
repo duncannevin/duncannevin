@@ -1,4 +1,4 @@
-#App, .column, .section {
+.column, .section, #App, #Head, #About, #Projects, #Blog, #Contact {
   display: flex;
   flex-direction: column; }
 
@@ -13,14 +13,15 @@ body {
   color: #4B4D4F;
   font: 14px 'Raleway', sans-serif;
   padding: 0;
+  margin: 0;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0; }
 
-#App {
-  height: 100%; }
+button {
+  outline: none; }
 
 a {
   color: #00B7FF; }
@@ -35,9 +36,13 @@ a {
   align-items: center; }
 
 .section {
-  flex: 1;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  height: 80vh;
+  position: relative;
+  overflow: hidden; }
+  .section:first-child {
+    height: 100vh; }
 
 .white-font {
   color: #FFFFFF; }
@@ -47,5 +52,40 @@ a {
 
 .green-font {
   color: #28C0C6; }
+
+.btn {
+  cursor: pointer; }
+
+.nav-btn {
+  background-color: transparent;
+  border: 2px solid #28C0C6;
+  color: #28C0C6;
+  border-radius: 2rem;
+  padding: 1rem;
+  font-size: 1rem; }
+  .nav-btn:hover {
+    background-color: #28C0C6;
+    color: #FFFFFF; }
+
+#App {
+  overflow: auto; }
+
+#Head .header-content .row {
+  margin: 0.5rem 0;
+  justify-content: space-around; }
+
+#About {
+  background-color: #FFFFFF; }
+
+#Projects {
+  background-color: #F5F5F5; }
+
+#Blog {
+  background-color: #FFFFFF; }
+
+#Contact {
+  height: min-content; }
+  #Contact::after {
+    display: none; }
 
 /*# sourceMappingURL=style.css.map */

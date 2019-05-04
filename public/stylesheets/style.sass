@@ -16,15 +16,15 @@ body
   color: $black
   font: 14px 'Raleway', sans-serif
   padding: 0
+  margin: 0
   position: absolute
   top: 0
   right: 0
   bottom: 0
   left: 0
 
-#App
-  @extend %flex-column
-  height: 100%
+button
+  outline: none
 
 a
   color: #00B7FF
@@ -44,9 +44,13 @@ a
 
 .section
   @extend %flex-column
-  flex: 1
   align-items: center
   justify-content: center
+  height: 80vh
+  position: relative
+  overflow: hidden
+  &:first-child
+    height: 100vh
 
 .white-font
   color: $white
@@ -56,3 +60,44 @@ a
 
 .green-font
   color: $green
+
+.btn
+  cursor: pointer
+
+.nav-btn
+  background-color: transparent
+  border: 2px solid $green
+  color: $green
+  border-radius: 2rem
+  padding: 1rem
+  font-size: 1rem
+  &:hover
+    background-color: $green
+    color: $white
+
+#App
+  @extend %flex-column
+  overflow: auto
+
+#App, #Head, #About, #Projects, #Blog, #Contact
+  @extend %flex-column
+
+#Head
+  .header-content
+    .row
+      margin: 0.5rem 0
+      justify-content: space-around
+
+#About
+  background-color: $white
+
+#Projects
+  background-color: $light-gray
+
+#Blog
+  background-color: $white
+
+#Contact
+  height: min-content
+  &::after
+    display: none

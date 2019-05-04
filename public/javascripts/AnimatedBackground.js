@@ -7,6 +7,18 @@ function applyAlpha (color, alpha) {
   return 'rgba(' + color + ',' + alpha + ')'
 }
 
+function randomArrayItem (arr) {
+  return arr[Math.floor(Math.random() * arr.length)]
+}
+
+function randomNumFrom (min, max) {
+  return Math.random() * (max - min) + min
+}
+
+function randomSidePos (length) {
+  return Math.ceil(Math.random() * length)
+}
+
 function Ball (type = 'random', canvasWidth, canvasHeight) {
   this.x = 0
   this.y = 0
@@ -63,18 +75,6 @@ function Ball (type = 'random', canvasWidth, canvasHeight) {
     }
   }
 
-  function randomArrayItem (arr) {
-    return arr[Math.floor(Math.random() * arr.length)]
-  }
-
-  function randomNumFrom (min, max) {
-    return Math.random() * (max - min) + min
-  }
-
-  function randomSidePos (length) {
-    return Math.ceil(Math.random() * length)
-  }
-
   function getRandomSpeed (pos) {
     if (pos === 'top') {
       return [randomNumFrom(min, max), randomNumFrom(0.1, max)]
@@ -96,6 +96,13 @@ function Ball (type = 'random', canvasWidth, canvasHeight) {
 function Balls (canvasHeight, canvasWidth, ctx) {
   this.list = []
   this.alphaF = 0.03
+  this.count = 120
+
+  const $headerContent = document.querySelector('.header-content')
+  const headerContentLeft = $headerContent.offsetLeft
+  const headerContentTop = $headerContent.offsetTop
+  const headerContentHeight = $headerContent.offsetHeight
+  const headerContentWidth = $headerContent.offsetWidth
 
   this.renderBalls = () => {
     this.list.forEach((ball) => {
@@ -109,12 +116,19 @@ function Balls (canvasHeight, canvasWidth, ctx) {
     })
   }
 
+  function isRemoveBall (ball) {
+    const isMouse = ball.type === 'mouse'
+    const isInMiddle = ((ball.x > headerContentLeft && ball.x < (headerContentLeft + headerContentWidth)) && (ball.y > headerContentTop && ball.y < (headerContentTop + headerContentHeight)))
+    const isOffEdge = (ball.x > -(50) && ball.x < (canvasWidth + 50) && ball.y > -(50) && ball.y < (canvasHeight + 50))
+    return isMouse || (isInMiddle && !isOffEdge) || (isOffEdge && !isInMiddle)
+  }
+
   this.updateBalls = () => {
     this.list.forEach((ball, index) => {
       ball.x += ball.vx
       ball.y += ball.vy
 
-      if (ball.type === 'mouse' || (ball.x > -(50) && ball.x < (canvasWidth + 50) && ball.y > -(50) && ball.y < (canvasHeight + 50))) {
+      if (isRemoveBall(ball)) {
         this.list[index] = ball
       } else {
         this.list.splice(index, 1)
@@ -128,8 +142,46 @@ function Balls (canvasHeight, canvasWidth, ctx) {
 
   // add balls if there a little balls
   this.addBallIfy = () => {
-    if (this.list.length < 70) {
-      this.list.push(new Ball('random', canvasWidth, canvasHeight))
+    if (this.list.length < this.count) {
+      const ball = new Ball('random', canvasWidth, canvasHeight)
+      this.list.push(ball)
+    }
+  }
+
+  this.centerInitialBalls = () => {
+    let count = this.count / 2
+    const randomStartPos = [
+      { // top
+        x: randomNumFrom(headerContentLeft, (headerContentLeft + headerContentWidth)),
+        y: headerContentTop - 100
+      },
+      { // right
+        x: headerContentLeft + headerContentWidth + 100,
+        y: randomNumFrom(headerContentTop, (headerContentTop + headerContentHeight))
+      },
+      { // bottom
+        x: randomNumFrom(headerContentLeft, (headerContentLeft + headerContentWidth)),
+        y: headerContentTop + headerContentHeight + 100
+      },
+      { // left
+        x: headerContentLeft - 100,
+        y: randomNumFrom(headerContentTop, (headerContentTop + headerContentHeight))
+      }
+    ]
+    for (count; count > 0; count--) {
+      const ball = new Ball('random', canvasWidth, canvasHeight)
+      const spotAroundContent = randomArrayItem(randomStartPos)
+      ball.x = spotAroundContent.x
+      ball.y = spotAroundContent.y
+      this.list.push(ball)
+    }
+  }
+
+  this.initialBalls = () => {
+    let count = this.count
+    for (count; count > 0; count--) {
+      const ball = new Ball('random', canvasWidth, canvasHeight)
+      this.list.push(ball)
     }
   }
 
@@ -200,7 +252,10 @@ class AnimatedBackground {
     this.balls = new Balls(this.height, this.width, this.ctx)
     this.lines = new Lines(this.balls.list, this.ctx)
     this.$ele.appendChild(this.canvas)
-    this.goMovie()
+    this.balls.addBallIfy(true)
+    this.balls.centerInitialBalls()
+    this.balls.initialBalls()
+    this.render()
   }
 
   events () {
@@ -226,12 +281,6 @@ class AnimatedBackground {
     this.balls.addBallIfy()
     this.balls.renderBalls()
     this.lines.renderLines()
-    window.requestAnimationFrame(dis.render)
-  }
-
-  goMovie () {
-    const dis = this
-    this.balls.addBallIfy()
     window.requestAnimationFrame(dis.render)
   }
 }

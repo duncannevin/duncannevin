@@ -133,6 +133,13 @@ function Balls (canvasHeight, canvasWidth, ctx) {
     }
   }
 
+  this.addBallToPosition = (x, y) => {
+    const ball = new Ball('random', canvasWidth, canvasHeight)
+    ball.x = x
+    ball.y = y
+    this.list.push(ball)
+  }
+
   return this
 }
 
@@ -157,7 +164,7 @@ function Lines (balls, ctx) {
 
         if (fraction < 1) {
           alpha = (1 - fraction).toString()
-          ctx.strokeStyle = applyAlpha(balls[i].color, alpha)
+          ctx.strokeStyle = applyAlpha(balls[j].color, alpha)
           ctx.lineWidth = linkLineWidth
           ctx.beginPath()
           ctx.moveTo(balls[i].x, balls[i].y)
@@ -206,6 +213,9 @@ class AnimatedBackground {
       const mBall = this.balls.list.find(ball => ball.type === 'mouse') || {x: 0, y: 0}
       mBall.x = evt.pageX
       mBall.y = evt.pageY
+    })
+    this.$ele.addEventListener('click', (evt) => {
+      this.balls.addBallToPosition(evt.offsetX, evt.offsetY)
     })
   }
 

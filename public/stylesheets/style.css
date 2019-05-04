@@ -1,0 +1,51 @@
+#App, .column, .section {
+  display: flex;
+  flex-direction: column; }
+
+.row {
+  display: flex; }
+
+html {
+  height: 100vh; }
+
+body {
+  background-color: #292E36;
+  color: #4B4D4F;
+  font: 14px 'Raleway', sans-serif;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+#App {
+  height: 100%; }
+
+a {
+  color: #00B7FF; }
+
+.lg-font {
+  font-size: 3rem; }
+
+.md-font {
+  font-size: 1.5rem; }
+
+.column {
+  flex: 1; }
+
+.section {
+  flex: 1;
+  align-items: center;
+  justify-content: center; }
+
+.white-font {
+  color: #FFFFFF; }
+
+.pink-font {
+  color: #F73778; }
+
+.green-font {
+  color: #28C0C6; }
+
+/*# sourceMappingURL=style.css.map */

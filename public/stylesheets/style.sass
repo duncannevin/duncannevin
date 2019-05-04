@@ -1,0 +1,58 @@
+@import '../../node_modules/normalize-scss/sass/normalize'
+@import 'colors'
+
+%flex-column
+  display: flex
+  flex-direction: column
+
+%flex-row
+  display: flex
+
+html
+  height: 100vh
+
+body
+  background-color: $gray
+  color: $black
+  font: 14px 'Raleway', sans-serif
+  padding: 0
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+
+#App
+  @extend %flex-column
+  height: 100%
+
+a
+  color: #00B7FF
+
+.lg-font
+  font-size: 3rem
+
+.md-font
+  font-size: 1.5rem
+
+.column
+  @extend %flex-column
+  flex: 1
+
+.row
+  @extend %flex-row
+
+.section
+  @extend %flex-column
+  flex: 1
+  align-items: center
+  justify-content: center
+
+.white-font
+  color: $white
+
+.pink-font
+  color: $pink
+
+.green-font
+  color: $green

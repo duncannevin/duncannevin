@@ -1,9 +1,11 @@
-.column, .section, #App, #Head, #About, #Projects, #Blog, #Contact {
+@charset "UTF-8";
+.column, .section, #Home, #About, #Projects, #Blog, #Contact {
   display: flex;
   flex-direction: column; }
 
-.row {
-  display: flex; }
+.row, .navbar {
+  display: flex;
+  flex-wrap: wrap; }
 
 html {
   height: 100vh; }
@@ -11,7 +13,8 @@ html {
 body {
   background-color: #292E36;
   color: #4B4D4F;
-  font: 14px 'Raleway', sans-serif;
+  font: 16px "Raleway", sans-serif;
+  line-height: 1.75rem;
   padding: 0;
   margin: 0;
   position: absolute;
@@ -26,21 +29,33 @@ button {
 a {
   color: #00B7FF; }
 
+p {
+  margin: 0; }
+
 .lg-font {
-  font-size: 3rem; }
+  font-size: 3rem;
+  line-height: 4rem; }
 
 .md-font {
-  font-size: 1.5rem; }
+  font-size: 2rem;
+  line-height: 3rem; }
 
 .column {
-  align-items: center; }
+  align-items: center;
+  max-width: 100%; }
+
+.row {
+  justify-content: center;
+  text-align: center;
+  max-width: 100%;
+  padding: 1rem 0; }
 
 .section {
   align-items: center;
   justify-content: center;
-  height: 80vh;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  padding: 5%; }
   .section:first-child {
     height: 100vh; }
 
@@ -53,26 +68,72 @@ a {
 .green-font {
   color: #28C0C6; }
 
-.btn {
-  cursor: pointer; }
+.underline {
+  border-bottom: 5px solid #4B4D4F; }
 
-.nav-btn {
+.slate-font {
+  color: #8C8C8C; }
+
+.bold-font {
+  font-weight: 900; }
+
+.btn, .nav {
+  cursor: pointer;
+  padding: 1rem;
+  font-size: 1rem;
+  min-width: 10rem; }
+
+.btn {
   background-color: transparent;
   border: 2px solid #28C0C6;
   color: #28C0C6;
-  border-radius: 2rem;
-  padding: 1rem;
-  font-size: 1rem; }
-  .nav-btn:hover {
+  border-radius: 2rem; }
+  .btn:hover {
     background-color: #28C0C6;
     color: #FFFFFF; }
+
+.lg-img {
+  height: 16rem;
+  width: auto; }
+
+.md-img {
+  height: 10rem;
+  width: auto; }
+
+.section-header {
+  position: absolute;
+  top: 3rem; }
+
+.avatar {
+  border-radius: 50%;
+  border: 3px solid #4B4D4F; }
+
+.navbar {
+  color: #FFFFFF;
+  position: fixed;
+  top: -20rem;
+  width: 100%;
+  z-index: 100;
+  background-color: #292E36;
+  border-bottom: 5px solid #28C0C6;
+  padding-left: 10%;
+  transition: top 0.2s ease; }
+  .navbar .active {
+    color: #F73778;
+    font-weight: 500; }
+  .navbar:hover {
+    top: 0; }
+  .navbar .nav {
+    padding: 0.5rem; }
 
 #App {
   overflow: auto; }
 
-#Head .header-content .row {
-  margin: 0.5rem 0;
-  justify-content: space-around; }
+#Home {
+  cursor: crosshair; }
+  #Home .header-content .row {
+    margin: 0.5rem 0;
+    justify-content: space-around; }
 
 #About {
   background-color: #FFFFFF; }
@@ -87,5 +148,44 @@ a {
   height: min-content; }
   #Contact::after {
     display: none; }
+
+.characteristic {
+  width: 16rem;
+  height: auto;
+  padding: 2rem; }
+  .characteristic .row:last-child {
+    font-size: 1.3rem; }
+
+.word-cloud {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+  .word-cloud .cloud-word {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: none;
+    transform: translate(-50%); }
+
+.quote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  padding: 3rem;
+  quotes: "“" "”" "‘" "’";
+  width: 50rem;
+  max-width: 100%; }
+  .quote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em; }
+  .quote p {
+    display: inline; }
+  .quote cite {
+    margin-top: 2rem; }
 
 /*# sourceMappingURL=style.css.map */

@@ -149,28 +149,30 @@ function Balls (canvasHeight, canvasWidth, ctx) {
   }
 
   this.centerInitialBalls = () => {
-    let count = this.count / 2
-    const randomStartPos = [
-      { // top
-        x: randomNumFrom(headerContentLeft, (headerContentLeft + headerContentWidth)),
-        y: headerContentTop - 100
-      },
-      { // right
-        x: headerContentLeft + headerContentWidth + 100,
-        y: randomNumFrom(headerContentTop, (headerContentTop + headerContentHeight))
-      },
-      { // bottom
-        x: randomNumFrom(headerContentLeft, (headerContentLeft + headerContentWidth)),
-        y: headerContentTop + headerContentHeight + 100
-      },
-      { // left
-        x: headerContentLeft - 100,
-        y: randomNumFrom(headerContentTop, (headerContentTop + headerContentHeight))
-      }
-    ]
+    let count = this.count
+    const randomStartPos = () => {
+      return [
+        { // top
+          x: randomNumFrom(headerContentLeft, (headerContentLeft + headerContentWidth)),
+          y: headerContentTop
+        },
+        { // right
+          x: headerContentLeft + headerContentWidth,
+          y: randomNumFrom(headerContentTop, (headerContentTop + headerContentHeight))
+        },
+        { // bottom
+          x: randomNumFrom(headerContentLeft, (headerContentLeft + headerContentWidth)),
+          y: headerContentTop + headerContentHeight
+        },
+        { // left
+          x: headerContentLeft,
+          y: randomNumFrom(headerContentTop, (headerContentTop + headerContentHeight))
+        }
+      ]
+    }
     for (count; count > 0; count--) {
       const ball = new Ball('random', canvasWidth, canvasHeight)
-      const spotAroundContent = randomArrayItem(randomStartPos)
+      const spotAroundContent = randomArrayItem(randomStartPos())
       ball.x = spotAroundContent.x
       ball.y = spotAroundContent.y
       this.list.push(ball)
@@ -233,10 +235,12 @@ function Lines (balls, ctx) {
 
 class AnimatedBackground {
   constructor (id) {
+    this.id = id
     this.$ele = document.getElementById(id)
     this.createCanvas = this.createCanvas.bind(this)
     this.height = this.$ele.offsetHeight
     this.width = this.$ele.offsetWidth
+    this.animationFrame = null
 
     this.render = this.render.bind(this)
 
@@ -274,6 +278,11 @@ class AnimatedBackground {
     })
   }
 
+  stopAnimation () {
+    window.cancelAnimationFrame(this.animationFrame)
+    this.$ele.removeChild(this.canvas)
+  }
+
   render () {
     const dis = this
     this.ctx.clearRect(0, 0, this.width, this.height)
@@ -281,6 +290,6 @@ class AnimatedBackground {
     this.balls.addBallIfy()
     this.balls.renderBalls()
     this.lines.renderLines()
-    window.requestAnimationFrame(dis.render)
+    this.animationFrame = window.requestAnimationFrame(dis.render)
   }
 }

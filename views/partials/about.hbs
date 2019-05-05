@@ -1,3 +1,28 @@
-<section id="About" class="section">
-  <h1>ABOUT</h1>
+<section id="About" class="section bold-font">
+  <div class="column">
+    <div class="row">
+      <img class="md-img" src="/images/me.jpg">
+    </div>
+    <div class="quote">
+      {{#each about.testimonials}}
+        &nbsp; &nbsp; &nbsp; &nbsp;<blockquote><p>{{ text }}</p><cite>-{{ author }}</cite></blockquote>
+      {{/each}}
+    </div>
+  </div>
+  <div class="column">
+    <div class="row">
+      {{#each about.characteristics}}
+        <div class="column characteristic">
+          <div class="row"><img class="md-img" src="{{{ image }}}"></div>
+          <div class="row md-font bold-font">{{{ header }}}</div>
+          <div class="row slate-font">{{{ subHeader }}}</div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+<!--  <div class="word-cloud">-->
+<!--    {{#each about.technicalSkills}}-->
+<!--      <span class="slate-font md-font cloud-word">{{ name }}</span>-->
+<!--    {{/each}}-->
+<!--  </div>-->
 </section>

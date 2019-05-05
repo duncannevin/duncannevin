@@ -98,6 +98,6 @@ function applyNavs () {
 function handleResize () {
   window.addEventListener('resize', function () {
     headBackground.stopAnimation()
-    startHeadAnimation()
+    startHomeAnimation()
   })
 }

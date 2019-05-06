@@ -1,3 +1,16 @@
+{{#if projects.list.length}}
 <section id="Projects" class="section">
-  <h1>Projects</h1>
+  <div class="row">
+    <div class="row">
+      {{#each projects.list}}
+        <div class="column">
+          <div class="row">
+            <img src="{{image}}">
+          </div>
+          <div class="row"><a href="{{location}}">{{name}}</a></div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
 </section>
+{{/if}}

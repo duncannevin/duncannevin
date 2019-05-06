@@ -61,8 +61,8 @@ const about = Object.assign({
     new TechnicalSkill('TypeScript', 75)
   ],
   about: `
-    Hello, meet Duncan. He is a creative individual with a massive amount of technical knowledge. You will find his ability
-    to understand and use the best technology an asset to your organization.
+    He is a proven leader, dedicated, creative under pressure and a highly skilled full stack developer with a multitude 
+    of experience building robust, fault tolerant systems. 
   `
 }, new Header('About', ''))
 
@@ -74,11 +74,15 @@ const testimonials = Object.assign({
       He is not afraid to tackle the most difficult problem available and stick with it until he has a design
       that solves the problem well, usually elegantly. I have no doubt that he will be an asset to any company
       lucky enough to work with him.
+    `),
+    new Testimonial('Grant BlahaErath, Technical Architect SAP Concur', `
+      It's really useful.  While there are tons of great tools to mock REST calls, this is the only tool that makes it 
+      easy to mock websocket connections. <br> (Regarding <a class="md-md-font underline" href="http://websocketclient.com" target="_blank">websocketclient.com</a>)
     `)
   ]
 }, new Header('Testimonials', ''))
 
-const projects = Object.assign({}, new Header('Projects', ''))
+// const projects = Object.assign({list: []}, new Header('Projects', ''))
 
 const contact = Object.assign({}, new Header('Contact', ''))
 
@@ -93,7 +97,7 @@ router.get('/', function (req, res, next) {
 })
 
 function assembleContent () {
-  const content = { common, home, about, projects, testimonials, contact }
+  const content = { common, home, about, testimonials, contact }
   return Object.assign(content, createNavs(content))
 }
 

@@ -118,6 +118,9 @@ function handleResize () {
   })
 }
 
+/**
+ * fills progress bars to assigned percentage
+ */
 function fillProgress () {
   const progressBars = document.querySelectorAll('.progress')
   progressBars.forEach(function (progress) {
@@ -149,6 +152,9 @@ const spinnerTemplate = `
   </svg>
 `
 
+/**
+ * while email is being sent
+ */
 function loadSentSpinner () {
   const $form = document.getElementById('contact-form')
   const $spinner = document.createElement('div')
@@ -162,6 +168,9 @@ function loadSentSpinner () {
   $form.appendChild($spinner)
 }
 
+/**
+ * upon successful email send
+ */
 function showSuccess () {
   const $form = document.getElementById('contact-form')
   const success = document.createElement('div')
@@ -175,6 +184,9 @@ function showSuccess () {
   $form.appendChild(success)
 }
 
+/**
+ * if email send is unsuccessful
+ */
 function showFailed () {
   const $form = document.getElementById('contact-form')
   const failed = document.createElement('div')
@@ -188,6 +200,11 @@ function showFailed () {
   $form.appendChild(failed)
 }
 
+/**
+ * handles error response
+ * @param response
+ * @return {{ok}|*}
+ */
 function handleErrors (response) {
   if (!response.ok) {
     throw Error(response.statusText)
@@ -195,6 +212,10 @@ function handleErrors (response) {
   return response
 }
 
+/**
+ * sends email to server to be forwarded
+ * @param evt
+ */
 function sendEmail (evt) {
   evt.preventDefault()
   const $form = this

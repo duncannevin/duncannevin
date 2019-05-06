@@ -1,7 +1,9 @@
 <section id="Testimonials" class="section">
-  <div class="row quote bold-font">
-    {{#each testimonials.list}}
-      <blockquote><p>{{ text }}</p><br><cite>-{{ author }}</cite></blockquote>
-    {{/each}}
+  {{#each testimonials.list}}
+  <div class="column">
+    <div class="row quote bold-font">
+      <blockquote><p>{{{ text }}}</p><br><cite>-{{ author }}</cite></blockquote>
+    </div>
   </div>
+  {{/each}}
 </section>

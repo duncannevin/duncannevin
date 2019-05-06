@@ -6,7 +6,7 @@ form, .column, .section, #Home, #About, #Projects, #Blog, #Contact {
   display: flex;
   flex-wrap: wrap; }
 
-.white-font.underline, .pink-font.underline, .green-font.underline, .slate-font.underline {
+.white-font.underline, .black-font.underline, .pink-font.underline, .green-font.underline, .slate-font.underline {
   border-bottom: 1px solid #4B4D4F; }
 
 html {
@@ -35,7 +35,8 @@ a {
   font-size: 1.6rem; }
 
 p {
-  margin: 0; }
+  margin: 0;
+  padding: 0; }
 
 form {
   display: flex; }
@@ -61,6 +62,10 @@ form input {
   line-height: 3rem; }
   .md-font.underline {
     border-width: 3px; }
+
+.sm-font {
+  font-size: 0.7rem;
+  line-height: 0.8rem; }
 
 .md-md-font {
   font-size: 1.5rem;
@@ -93,6 +98,11 @@ form input {
   color: #FFFFFF; }
   .white-font.underline {
     border-color: #FFFFFF; }
+
+.black-font {
+  color: #4B4D4F; }
+  .black-font.underline {
+    border-color: #4B4D4F; }
 
 .pink-font {
   color: #F73778; }
@@ -175,9 +185,17 @@ form input {
 
 #Projects {
   background-color: #F5F5F5; }
+  #Projects .row {
+    width: 80rem;
+    max-width: 100%; }
 
 #Testimonials {
-  background-color: #FFFFFF; }
+  background-color: #F5F5F5; }
+  #Testimonials .column {
+    width: 100%;
+    align-items: flex-start; }
+  #Testimonials .column:nth-child(even) {
+    align-items: flex-end; }
 
 #Contact {
   height: min-content; }
@@ -223,7 +241,7 @@ form input {
       transition: top 0.2s ease; }
 
 .quote {
-  background: #F5F5F5;
+  background: #FFFFFF;
   border-left: 10px solid #292E36;
   padding: 3rem;
   color: #4B4D4F;

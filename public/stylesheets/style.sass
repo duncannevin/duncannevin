@@ -47,6 +47,7 @@ a
 
 p
   margin: 0
+  padding: 0
 
 form
   @extend %flex-column
@@ -75,6 +76,10 @@ form
   line-height: 3rem
   &.underline
     +underline-size(3px)
+
+.sm-font
+  font-size: 0.7rem
+  line-height: 0.8rem
 
 .md-md-font
   font-size: 1.5rem
@@ -111,6 +116,12 @@ form
   &.underline
     @extend %underline
     +underline-color($white)
+
+.black-font
+  color: $black
+  &.underline
+    @extend %underline
+    +underline-color($black)
 
 .pink-font
   color: $pink
@@ -201,9 +212,17 @@ form
 
 #Projects
   background-color: $light-gray
+  .row
+    width: 80rem
+    max-width: 100%
 
 #Testimonials
-  background-color: $white
+  background-color: $light-gray
+  .column
+    width: 100%
+    align-items: flex-start
+  .column:nth-child(even)
+    align-items: flex-end
 
 #Contact
   height: min-content
@@ -250,7 +269,7 @@ form
       transition: top 0.2s ease
 
 .quote
-  background: $light-gray
+  background: $white
   border-left: 10px solid $gray
   padding: 3rem
   color: $black

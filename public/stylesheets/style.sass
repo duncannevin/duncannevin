@@ -11,6 +11,15 @@ $font-size: 16px
   display: flex
   flex-wrap: wrap
 
+%underline
+  border-bottom: 1px solid $black
+
+=underline-size($size)
+  border-width: $size
+
+=underline-color($color)
+  border-color: $color
+
 html
   height: 100vh
 
@@ -29,12 +38,33 @@ body
 
 button
   outline: none
+  text-align: center
 
 a
   color: #00B7FF
+  text-decoration: none
+  font-size: 1.6rem
 
 p
   margin: 0
+
+form
+  @extend %flex-column
+  display: flex
+  *
+    margin: 0.9rem 0 0
+    outline: none
+  input:not([type="submit"]), textarea
+    border: none
+    border-radius: 3px
+    text-align: left!important
+    padding: 0.25rem!important
+
+form
+  input
+    border: none
+    border-radius: 3px
+
 
 .lg-font
   font-size: 3rem
@@ -43,11 +73,20 @@ p
 .md-font
   font-size: 2rem
   line-height: 3rem
+  &.underline
+    +underline-size(3px)
+
+.md-md-font
+  font-size: 1.5rem
+  line-height: 1.75rem
+  &.underline
+    +underline-size(3px)
 
 .column
   @extend %flex-column
   align-items: center
   max-width: 100%
+  flex-wrap: wrap
 
 .row
   @extend %flex-row
@@ -63,23 +102,33 @@ p
   position: relative
   overflow: hidden
   padding: 5%
+  min-height: 80vh
   &:first-child
     height: 100vh
 
 .white-font
   color: $white
+  &.underline
+    @extend %underline
+    +underline-color($white)
 
 .pink-font
   color: $pink
+  &.underline
+    @extend %underline
+    +underline-color($pink)
 
 .green-font
   color: $green
-
-.underline
-  border-bottom: 5px solid $black
+  &.underline
+    @extend %underline
+    +underline-color($green)
 
 .slate-font
   color: $slate-black
+  &.underline
+    @extend %underline
+    +underline-color($slate-black)
 
 .bold-font
   font-weight: 900
@@ -134,7 +183,6 @@ p
   .nav
     padding: 0.5rem
 
-
 #App
   overflow: auto
 
@@ -154,13 +202,21 @@ p
 #Projects
   background-color: $light-gray
 
-#Blog
+#Testimonials
   background-color: $white
 
 #Contact
   height: min-content
-  &::after
-    display: none
+  .column
+    #contact-form
+      width: 40rem
+      max-width: 90%
+    input, textarea
+      font-size: 1.4rem
+    input[type="text"], textarea
+      width: 100%
+    textarea
+      resize: none
 
 .characteristic
   width: 16rem
@@ -169,29 +225,42 @@ p
   .row:last-child
     font-size: 1.3rem
 
-.word-cloud
-  position: absolute
-  top: 0
-  right: 0
-  bottom: 0
-  left: 0
-  .cloud-word
-    position: absolute
-    top: 50%
-    left: 50%
-    display: none
-    transform: translate(-50%)
+.about-me
+  width: 24rem
+  color: $slate-black
+  height: min-content
+
+.technical-skills
+  padding: 0 2rem
+  .progress, .bar
+    border-radius: 3px
+  .progress
+    height: min-content
+    width: 14rem
+    text-align: left
+    background-color: $slate-black
+    margin: 0.5rem
+    color: $white
+    .bar
+      padding-left: 0.5rem
+      background-color: $progress-green
+      height: 100%
+      width: 0
+      float: left
+      transition: top 0.2s ease
 
 .quote
-  background: #f9f9f9
-  border-left: 10px solid #ccc
+  background: $light-gray
+  border-left: 10px solid $gray
   padding: 3rem
-  quotes: "\201C""\201D""\2018""\2019"
+  color: $black
+  text-align: left
+  font-size: 1.2rem
   width: 50rem
   max-width: 100%
   &:before
-    color: #ccc
-    content: open-quote
+    color: $black
+    content: "\201C"
     font-size: 4em
     line-height: 0.1em
     margin-right: 0.25em
@@ -200,3 +269,34 @@ p
     display: inline
   cite
     margin-top: 2rem
+    float: right
+
+.sent-spinner
+  position: absolute
+  height: 20rem
+  width: auto
+  -webkit-animation: spin 2.2s infinite linear
+  -moz-animation: spin 2.2s infinite linear
+  display: block
+  margin: 0 auto
+  svg
+    height: 10rem
+    transform: rotate(90deg)
+    width: auto
+
+.trail
+  fill: none
+
+  @-moz-keyframes spin
+    0%
+      -moz-transform: rotate( 0deg )
+
+    100%
+      -moz-transform: rotate( 360deg )
+
+  @-webkit-keyframes spin
+    0%
+      -webkit-transform: rotate( 0deg )
+
+    100%
+      -webkit-transform: rotate( 360deg )

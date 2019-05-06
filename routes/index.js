@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const HandleBars = require('hbs')
 
 class Header {
   constructor (header, subHeader, image) {
@@ -40,25 +41,33 @@ const about = Object.assign({
     new Header('Reactive', 'The view layer reacts immediately to server response.', 'reactive.png')
   ],
   technicalSkills: [
-    new TechnicalSkill('Scala', 70),
-    new TechnicalSkill('Javascript', 90),
+    new TechnicalSkill('Scala', 80),
+    new TechnicalSkill('Javascript', 80),
     new TechnicalSkill('CSS', 80),
-    new TechnicalSkill('Sass', 80),
+    new TechnicalSkill('Sass', 70),
     new TechnicalSkill('HTML', 90),
-    new TechnicalSkill('VueJS', 90),
+    new TechnicalSkill('VueJS', 80),
     new TechnicalSkill('JQuery', 80),
-    new TechnicalSkill('Play!', 90),
+    new TechnicalSkill('Play!', 80),
     new TechnicalSkill('Akka', 65),
-    new TechnicalSkill('NodeJS', 90),
-    new TechnicalSkill('ExpressJS', 90),
+    new TechnicalSkill('NodeJS', 80),
+    new TechnicalSkill('ExpressJS', 80),
     new TechnicalSkill('MongoDB', 60),
     new TechnicalSkill('MySql', 55),
     new TechnicalSkill('Git', 95),
     new TechnicalSkill('GitHub', 95),
     new TechnicalSkill('Vim', 65),
-    new TechnicalSkill('Linux', 75)
+    new TechnicalSkill('Linux', 75),
+    new TechnicalSkill('TypeScript', 75)
   ],
-  testimonials: [
+  about: `
+    Hello, meet Duncan. He is a creative individual with a massive amount of technical knowledge. You will find his ability
+    to understand and use the best technology an asset to your organization.
+  `
+}, new Header('About', ''))
+
+const testimonials = Object.assign({
+  list: [
     new Testimonial('Jack Couch, CEO DeepIntel Solutions LLC', `
         Duncan is a pleasure to work with. He is extremely motivated, hardworking and productive.
       He writes more usable code per day than any developer with his years of experience ever hired by DeepIntel.
@@ -67,7 +76,16 @@ const about = Object.assign({
       lucky enough to work with him.
     `)
   ]
-}, new Header('About', ''))
+}, new Header('Testimonials', ''))
+
+const projects = Object.assign({}, new Header('Projects', ''))
+
+const contact = Object.assign({}, new Header('Contact', ''))
+
+HandleBars.registerHelper('splitEvenly', function (array) {
+  const mid = Math.abs(Math.ceil(array.length / 2))
+  return [array.slice(0, mid), array.slice(mid)]
+})
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -75,7 +93,7 @@ router.get('/', function (req, res, next) {
 })
 
 function assembleContent () {
-  const content = { common, home, about }
+  const content = { common, home, about, projects, testimonials, contact }
   return Object.assign(content, createNavs(content))
 }
 

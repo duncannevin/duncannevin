@@ -1,11 +1,13 @@
-@charset "UTF-8";
-.column, .section, #Home, #About, #Projects, #Blog, #Contact {
+form, .column, .section, #Home, #About, #Projects, #Blog, #Contact {
   display: flex;
   flex-direction: column; }
 
 .row, .navbar {
   display: flex;
   flex-wrap: wrap; }
+
+.white-font.underline, .pink-font.underline, .green-font.underline, .slate-font.underline {
+  border-bottom: 1px solid #4B4D4F; }
 
 html {
   height: 100vh; }
@@ -24,13 +26,31 @@ body {
   left: 0; }
 
 button {
-  outline: none; }
+  outline: none;
+  text-align: center; }
 
 a {
-  color: #00B7FF; }
+  color: #00B7FF;
+  text-decoration: none;
+  font-size: 1.6rem; }
 
 p {
   margin: 0; }
+
+form {
+  display: flex; }
+  form * {
+    margin: 0.9rem 0 0;
+    outline: none; }
+  form input:not([type="submit"]), form textarea {
+    border: none;
+    border-radius: 3px;
+    text-align: left !important;
+    padding: 0.25rem !important; }
+
+form input {
+  border: none;
+  border-radius: 3px; }
 
 .lg-font {
   font-size: 3rem;
@@ -39,10 +59,19 @@ p {
 .md-font {
   font-size: 2rem;
   line-height: 3rem; }
+  .md-font.underline {
+    border-width: 3px; }
+
+.md-md-font {
+  font-size: 1.5rem;
+  line-height: 1.75rem; }
+  .md-md-font.underline {
+    border-width: 3px; }
 
 .column {
   align-items: center;
-  max-width: 100%; }
+  max-width: 100%;
+  flex-wrap: wrap; }
 
 .row {
   justify-content: center;
@@ -55,24 +84,30 @@ p {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: 5%; }
+  padding: 5%;
+  min-height: 80vh; }
   .section:first-child {
     height: 100vh; }
 
 .white-font {
   color: #FFFFFF; }
+  .white-font.underline {
+    border-color: #FFFFFF; }
 
 .pink-font {
   color: #F73778; }
+  .pink-font.underline {
+    border-color: #F73778; }
 
 .green-font {
   color: #28C0C6; }
-
-.underline {
-  border-bottom: 5px solid #4B4D4F; }
+  .green-font.underline {
+    border-color: #28C0C6; }
 
 .slate-font {
   color: #8C8C8C; }
+  .slate-font.underline {
+    border-color: #8C8C8C; }
 
 .bold-font {
   font-weight: 900; }
@@ -141,13 +176,20 @@ p {
 #Projects {
   background-color: #F5F5F5; }
 
-#Blog {
+#Testimonials {
   background-color: #FFFFFF; }
 
 #Contact {
   height: min-content; }
-  #Contact::after {
-    display: none; }
+  #Contact .column #contact-form {
+    width: 40rem;
+    max-width: 90%; }
+  #Contact .column input, #Contact .column textarea {
+    font-size: 1.4rem; }
+  #Contact .column input[type="text"], #Contact .column textarea {
+    width: 100%; }
+  #Contact .column textarea {
+    resize: none; }
 
 .characteristic {
   width: 16rem;
@@ -156,29 +198,42 @@ p {
   .characteristic .row:last-child {
     font-size: 1.3rem; }
 
-.word-cloud {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0; }
-  .word-cloud .cloud-word {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    display: none;
-    transform: translate(-50%); }
+.about-me {
+  width: 24rem;
+  color: #8C8C8C;
+  height: min-content; }
+
+.technical-skills {
+  padding: 0 2rem; }
+  .technical-skills .progress, .technical-skills .bar {
+    border-radius: 3px; }
+  .technical-skills .progress {
+    height: min-content;
+    width: 14rem;
+    text-align: left;
+    background-color: #8C8C8C;
+    margin: 0.5rem;
+    color: #FFFFFF; }
+    .technical-skills .progress .bar {
+      padding-left: 0.5rem;
+      background-color: #28a745;
+      height: 100%;
+      width: 0;
+      float: left;
+      transition: top 0.2s ease; }
 
 .quote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
+  background: #F5F5F5;
+  border-left: 10px solid #292E36;
   padding: 3rem;
-  quotes: "“" "”" "‘" "’";
+  color: #4B4D4F;
+  text-align: left;
+  font-size: 1.2rem;
   width: 50rem;
   max-width: 100%; }
   .quote:before {
-    color: #ccc;
-    content: open-quote;
+    color: #4B4D4F;
+    content: "\201C";
     font-size: 4em;
     line-height: 0.1em;
     margin-right: 0.25em;
@@ -186,6 +241,35 @@ p {
   .quote p {
     display: inline; }
   .quote cite {
-    margin-top: 2rem; }
+    margin-top: 2rem;
+    float: right; }
+
+.sent-spinner {
+  position: absolute;
+  height: 20rem;
+  width: auto;
+  -webkit-animation: spin 2.2s infinite linear;
+  -moz-animation: spin 2.2s infinite linear;
+  display: block;
+  margin: 0 auto; }
+  .sent-spinner svg {
+    height: 10rem;
+    transform: rotate(90deg);
+    width: auto; }
+
+.trail {
+  fill: none; }
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg); }
+  100% {
+    -moz-transform: rotate(360deg); } }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
 
 /*# sourceMappingURL=style.css.map */

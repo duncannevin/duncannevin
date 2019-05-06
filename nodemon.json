@@ -1,5 +1,5 @@
 {
-  "watch": ["app.js", "public", "bin/www", "routes", "views"],
+  "watch": ["./app.js", "public", "bin/www", "routes", "views"],
   "ext": "js, sass, hbs",
   "ignore": [".git", "node_modules"],
   "exec": "yarn run lint && yarn start"

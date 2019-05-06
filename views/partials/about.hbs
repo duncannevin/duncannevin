@@ -1,15 +1,5 @@
 <section id="About" class="section bold-font">
-  <div class="column">
-    <div class="row">
-      <img class="md-img" src="/images/me.jpg">
-    </div>
-    <div class="quote">
-      {{#each about.testimonials}}
-        &nbsp; &nbsp; &nbsp; &nbsp;<blockquote><p>{{ text }}</p><cite>-{{ author }}</cite></blockquote>
-      {{/each}}
-    </div>
-  </div>
-  <div class="column">
+  <div class="row">
     <div class="row">
       {{#each about.characteristics}}
         <div class="column characteristic">
@@ -20,9 +10,23 @@
       {{/each}}
     </div>
   </div>
-<!--  <div class="word-cloud">-->
-<!--    {{#each about.technicalSkills}}-->
-<!--      <span class="slate-font md-font cloud-word">{{ name }}</span>-->
-<!--    {{/each}}-->
-<!--  </div>-->
+  <div class="row">
+    <div class="column about-me">
+      <div class="row">
+        <img class="md-img" src="/images/me.jpg">
+      </div>
+      <div class="row">
+        <p>{{about.about}}</p>
+      </div>
+    </div>
+    <div class="row technical-skills">
+      {{#each (splitEvenly about.technicalSkills) as |skillSet|}}
+        <div class="column">
+          {{#each skillSet}}
+            <div class="progress" data-per="{{ proficiency }}" data-name="{{ name }}"></div>
+          {{/each}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
 </section>

@@ -89,10 +89,13 @@ form input {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: 5% 0;
+  padding: 10%;
   min-height: 80vh; }
   .section:first-child {
     height: 100vh; }
+  @media (max-width: 1150px) {
+    .section {
+      padding: 10% 0; } }
 
 .white-font {
   color: #FFFFFF; }
@@ -243,12 +246,13 @@ form input {
 .quote {
   background: #FFFFFF;
   border-left: 10px solid #292E36;
-  padding: 5vmin;
+  padding: 5%;
   color: #4B4D4F;
   text-align: left;
   font-size: 1.2rem;
   width: 50rem;
-  max-width: 100%; }
+  max-width: 100%;
+  margin-top: 8%; }
   .quote:before {
     color: #4B4D4F;
     content: "\201C";

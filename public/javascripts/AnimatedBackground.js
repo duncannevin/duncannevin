@@ -94,15 +94,16 @@ function Ball (type = 'random', canvasWidth, canvasHeight) {
 }
 
 function Balls (canvasHeight, canvasWidth, ctx) {
-  this.list = []
-  this.alphaF = 0.03
-  this.count = 120
-
+  const clientWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
   const $headerContent = document.querySelector('.header-content')
   const headerContentLeft = $headerContent.offsetLeft
   const headerContentTop = $headerContent.offsetTop
   const headerContentHeight = $headerContent.offsetHeight
   const headerContentWidth = $headerContent.offsetWidth
+
+  this.list = []
+  this.alphaF = 0.03
+  this.count = Math.min(clientWidth / 15, 120)
 
   this.renderBalls = () => {
     this.list.forEach((ball) => {

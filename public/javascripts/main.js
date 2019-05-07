@@ -35,6 +35,7 @@ function showNavbar () {
   const $About = document.getElementById('About')
   const windowOT = window.scrollY
   const aboutOT = $About.offsetTop
+  $navbar.style.display = 'flex'
   if (windowOT >= aboutOT - (aboutOT / 2)) {
     $navbar.style.top = 0
   } else {
@@ -103,7 +104,7 @@ function applyPaddingToSections () {
   const navbarHeight = $navbar.offsetHeight
   document.getElementById('App').style.paddingBottom = navbarHeight * 2 + 'px'
   document.querySelectorAll('.section').forEach(function (section) {
-    section.style.paddingTop = navbarHeight + 'px'
+    if (section.id !== 'Home') section.style.paddingTop = navbarHeight + 'px'
   })
 }
 

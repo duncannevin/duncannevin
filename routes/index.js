@@ -100,6 +100,7 @@ const testimonials = Object.assign({
 const projects = Object.assign({list: [
   new Project('Websocket Client', 'http://websocketclient.com', 'A browser based websocket client. Your state is saved automatically in real time.'),
   new Project('Loris Editor', 'http://loris-edit.herokuapp.com/', 'A coding collaboration tool. Just share the url with anyone you want to write code with.'),
+  new Project('Job Market', 'https://bots.kik.com/#/jobmarket', 'Kik bot for connecting freelancers to contractors.'),
   new Project('You\'ve Got Bitcoin', 'https://github.com/duncannevin/youvegotbitcoin', 'Send Bitcoin securely to anyone via email. This project is still in development, feel free to contribute!'),
   new Project('Secret Messenger', 'https://github.com/duncannevin/secretmessenger', 'This app was built to demonstrate the ability to share a single flow between many clients. The long term plan for this app is yet to be decided, but it could potentially be used for setting up chat rooms that the server is unaware of.'),
   new Project('Akka Http Quickstart', 'https://github.com/duncannevin/akkahttp-quickstart', 'Akka HTTP seed.'),

@@ -6,7 +6,7 @@ form, .column, .section, #Home, #About, #Projects, #Blog, #Contact {
   display: flex;
   flex-wrap: wrap; }
 
-.white-font.underline, .black-font.underline, .pink-font.underline, .green-font.underline, .slate-font.underline {
+.underline, .white-font.underline, .black-font.underline, .pink-font.underline, .green-font.underline, .slate-font.underline, .blue-font.underline {
   border-bottom: 1px solid #4B4D4F; }
 
 html {
@@ -123,6 +123,11 @@ form input {
   .slate-font.underline {
     border-color: #8C8C8C; }
 
+.blue-font {
+  color: #00B7FF; }
+  .blue-font.underline {
+    border-color: #00B7FF; }
+
 .bold-font {
   font-weight: 900; }
 
@@ -212,6 +217,14 @@ form input {
     width: 100%; }
   #Contact .column textarea {
     resize: none; }
+
+#Projects {
+  background-color: #FFFFFF; }
+  #Projects .tile {
+    background-color: #F5F5F5;
+    width: 30rem;
+    margin: 4%;
+    padding: 0.5rem; }
 
 .characteristic {
   width: 16rem;

@@ -24,6 +24,14 @@ class Testimonial {
   }
 }
 
+class Project {
+  constructor (name, location, description) {
+    this.name = name
+    this.location = location
+    this.description = description
+  }
+}
+
 const common = {
   title: 'Duncan Nevin'
 }
@@ -76,13 +84,27 @@ const testimonials = Object.assign({
       lucky enough to work with him.
     `),
     new Testimonial('Grant BlahaErath, Technical Architect SAP Concur', `
+      I have greatly enjoyed working with Duncan over the last couple years. 
+
+      Duncan learns new technologies, software languages and software approaches far faster than most of the engineers I worked with, and loves doing it at the same time. Duncan is also a great communicator and very easy to work with. Duncan also doesn’t shy away from difficult tasks, and is willing to go forward into unknown areas and find solutions. Finally, Duncan is a triple-thread engineer that is comfortable in the three styles of coding: Imperative, Declarative and Actor (asynchronous messaging), while most other engineers are only able to master the imperative approach.
+
+      These things cause me to believe Duncan is one of the rare new engineers that not only show the potential to become a great software engineers, but also become a great software architect. I’m looking forward to seeing where Duncan will go in the future.
+    `),
+    new Testimonial('Grant BlahaErath, Technical Architect SAP Concur', `
       It's really useful.  While there are tons of great tools to mock REST calls, this is the only tool that makes it 
       easy to mock websocket connections. <br> (Regarding <a class="md-md-font underline" href="http://websocketclient.com" target="_blank">websocketclient.com</a>)
     `)
   ]
 }, new Header('Testimonials', ''))
 
-// const projects = Object.assign({list: []}, new Header('Projects', ''))
+const projects = Object.assign({list: [
+  new Project('Websocket Client', 'http://websocketclient.com', 'A browser based websocket client. Your state is saved automatically in real time.'),
+  new Project('Loris Editor', 'http://loris-edit.herokuapp.com/', 'A coding collaboration tool. Just share the url with anyone you want to write code with.'),
+  new Project('You\'ve Got Bitcoin', 'https://github.com/duncannevin/youvegotbitcoin', 'Send Bitcoin securely to anyone via email. This project is still in development, feel free to contribute!'),
+  new Project('Secret Messenger', 'https://github.com/duncannevin/secretmessenger', 'This app was built to demonstrate the ability to share a single flow between many clients. The long term plan for this app is yet to be decided, but it could potentially be used for setting up chat rooms that the server is unaware of.'),
+  new Project('Akka Http Quickstart', 'https://github.com/duncannevin/akkahttp-quickstart', 'Akka HTTP seed.'),
+  new Project('Conways Game of Life', 'https://github.com/duncannevin/conways-game-of-life', 'This is a great example of a perfect use case of Akka Actors. I eventually want to improve this by adding authentication so that your game can run in the server even if you leave the site.')
+]}, new Header('Projects', ''))
 
 const contact = Object.assign({}, new Header('Contact', ''))
 
@@ -97,7 +119,7 @@ router.get('/', function (req, res, next) {
 })
 
 function assembleContent () {
-  const content = { common, home, about, testimonials, contact }
+  const content = { common, home, about, testimonials, projects, contact }
   return Object.assign(content, createNavs(content))
 }
 

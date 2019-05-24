@@ -3,11 +3,14 @@
   <div class="row">
     <div class="row">
       {{#each projects.list}}
-        <div class="column">
+        <div class="column tile">
           <div class="row">
             <img src="{{image}}">
           </div>
-          <div class="row"><a href="{{location}}">{{name}}</a></div>
+          <div class="row"><a class="blue-font md-font underline" href="{{location}}" target="_blank">{{name}}</a></div>
+          <div class="row">
+            <p>{{description}}</p>
+          </div>
         </div>
       {{/each}}
     </div>

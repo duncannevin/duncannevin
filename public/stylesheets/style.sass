@@ -41,7 +41,7 @@ button
   text-align: center
 
 a
-  color: #00B7FF
+  color: $blue
   text-decoration: none
   font-size: 1.6rem
 
@@ -70,6 +70,9 @@ form
 .lg-font
   font-size: 3rem
   line-height: 4rem
+
+.underline
+  @extend %underline
 
 .md-font
   font-size: 2rem
@@ -143,6 +146,13 @@ form
   &.underline
     @extend %underline
     +underline-color($slate-black)
+
+.blue-font 
+  color: $blue
+  &.underline
+    @extend %underline
+    +underline-color($blue)
+
 
 .bold-font
   font-weight: 900
@@ -239,6 +249,14 @@ form
       width: 100%
     textarea
       resize: none
+
+#Projects
+  background-color: $white
+  .tile
+    background-color: $light-gray
+    width: 30rem
+    margin: 4%
+    padding: 0.5rem
 
 .characteristic
   width: 16rem

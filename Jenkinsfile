@@ -8,9 +8,7 @@ pipeline {
 		stage('Checkout') {
 			steps {
 				echo 'Checkout...'
-				sh '''
-                    checkout scm
-				'''
+                checkout scm
 			}
 		}
 		stage('Configure env') {

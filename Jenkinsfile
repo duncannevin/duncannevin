@@ -8,9 +8,11 @@ pipeline {
 			}
 		}
 		stage('Install') {
-		    sh '''
-		        npm install
-		    '''
+		    steps {
+                sh '''
+                    npm install
+                '''
+		    }
 		}
 		stage('Start') {
 			steps {

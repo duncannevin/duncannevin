@@ -4,11 +4,20 @@ pipeline {
 		stage('Checkout') {
 			steps {
 				echo 'Checkout...'
+				checkout scm
 			}
 		}
-		stage('Build') {
+		stage('Install') {
+		    sh '''
+		        npm install
+		    '''
+		}
+		stage('Start') {
 			steps {
 				echo 'Build...'
+		        sh '''
+		            ls
+		        '''
 			}
 		}
 	}

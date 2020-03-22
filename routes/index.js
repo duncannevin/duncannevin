@@ -119,6 +119,10 @@ router.get('/', function (req, res, next) {
   res.render('index', assembleContent())
 })
 
+router.get('/isaiah', function (req, res) {
+  res.send('Isaiah')
+})
+
 function assembleContent () {
   const content = { common, home, about, testimonials, projects, contact }
   return Object.assign(content, createNavs(content))

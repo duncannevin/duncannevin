@@ -24,7 +24,7 @@ pipeline {
 		        sh '''
 		            ssh ${SERVER_CREDS} rm -rf ${PROJECT_LOC};
 		            ssh ${SERVER_CREDS} mkdir duncannevin;
-		            scp -r ./ ${SERVER_CREDS}:duncannevin;
+		            scp -r ./** ${SERVER_CREDS}:duncannevin;
 		            ssh ${SERVER_CREDS} pm2 restart npm
 		        '''
 			}

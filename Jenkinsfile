@@ -8,20 +8,26 @@ pipeline {
 		stage('Checkout') {
 			steps {
 				echo 'Checkout...'
-				checkout scm
+				sh '''
+                    checkout scm
+				'''
 			}
 		}
 		stage('Configure env') {
 		    steps {
                 echo 'Configure env...'
-                nvm use 8
-                echo 'node -v'
+                sh '''
+                    nvm use 8
+                    echo 'node -v'
+                '''
 		    }
 		}
 		stage('Install') {
 		    steps {
 		        echo 'Install...'
-		        npm install
+		        sh '''
+                    npm install
+		        '''
 		    }
 		}
 		stage('Start') {

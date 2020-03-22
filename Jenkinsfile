@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+	environment {
+	    SERVER_CREDS="duncan@158.89.232.237"
+	}
 	stages {
 		stage('Checkout') {
 			steps {
@@ -18,7 +21,8 @@ pipeline {
 			steps {
 				echo 'Start...'
 		        sh '''
-		            rsync -avz -e 'ssh' ./**/ duncan@159.89.232.237:/duncannevin
+		            rsync -avz -e 'ssh' ./**/ ${SERVER_CREDS}:/duncannevin
+		            ssh ${SERVER_CREDS} ls
 		        '''
 			}
 		}

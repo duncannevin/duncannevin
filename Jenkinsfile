@@ -11,11 +11,23 @@ pipeline {
 				checkout scm
 			}
 		}
+		stage('Configure env') {
+		    steps {
+                echo 'Configure env...'
+                nvm use 8
+                echo 'node -v'
+		    }
+		}
+		stage('Install') {
+		    steps {
+		        echo 'Install...'
+		        npm install
+		    }
+		}
 		stage('Start') {
 			steps {
 				echo 'Start...'
 		        sh '''
-		            ssh ${SERVER_CREDS} nvm use 8
 		            ssh ${SERVER_CREDS} pm2 stop all
 		            ssh ${SERVER_CREDS} rm -rf ${PROJECT_LOC}
 		            ssh ${SERVER_CREDS} mkdir ${PROJECT_LOC}
@@ -28,6 +40,7 @@ pipeline {
 	}
 	post {
 	    always {
+	        nvm use 13
 	        deleteDir()
 	    }
 	}

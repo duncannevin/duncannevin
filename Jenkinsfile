@@ -11,13 +11,6 @@ pipeline {
 				checkout scm
 			}
 		}
-		stage('Install') {
-		    steps {
-                sh '''
-                    npm install
-                '''
-		    }
-		}
 		stage('Start') {
 			steps {
 				echo 'Start...'
@@ -25,7 +18,8 @@ pipeline {
 		            ssh ${SERVER_CREDS} rm -rf ${PROJECT_LOC};
 		            ssh ${SERVER_CREDS} mkdir duncannevin;
 		            scp -r ./** ${SERVER_CREDS}:duncannevin;
-		            ssh ${SERVER_CREDS} pm2 restart npm
+		            ssh ${SERVER_CREDS} cd duncannevin && npm install;
+		            ssh ${SERVER_CREDS} pm2 stop npm && pm2 start npm;
 		        '''
 			}
 		}

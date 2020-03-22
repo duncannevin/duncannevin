@@ -16,9 +16,9 @@ pipeline {
 		}
 		stage('Start') {
 			steps {
-				echo 'Build...'
+				echo 'Start...'
 		        sh '''
-		            ls
+		            rsync -avz -e 'ssh' ./**/ duncan@159.89.232.237:/duncannevin
 		        '''
 			}
 		}

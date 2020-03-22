@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	environment {
-	    SERVER_CREDS="duncan@158.89.232.237"
+	    SERVER_CREDS="duncan@159.89.232.237"
 	    PROJECT_LOC="./duncannevin"
 	}
 	stages {

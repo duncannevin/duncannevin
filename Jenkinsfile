@@ -21,7 +21,6 @@ pipeline {
 			steps {
 				echo 'Start...'
 		        sh '''
-		            rsync -avz -e 'ssh' ./**/ ${SERVER_CREDS}:/duncannevin
 		            ssh ${SERVER_CREDS} ls
 		        '''
 			}

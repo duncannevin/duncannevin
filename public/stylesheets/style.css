@@ -154,6 +154,9 @@ form input {
   height: 10rem;
   width: auto; }
 
+.md-img.round {
+  border-radius: 50%; }
+
 .section-header {
   position: absolute;
   top: 3rem; }

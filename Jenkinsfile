@@ -46,7 +46,6 @@ pipeline {
 	}
 	post {
 	    always {
-	        nvm use 13
 	        deleteDir()
 	    }
 	}

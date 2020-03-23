@@ -1,9 +1,7 @@
 pipeline {
 	agent {
-	    docker {
-	        'node:7-alpine'
-        }
-	}
+        docker { image 'node:7-alpine' }
+    }
 	environment {
 	    SERVER_CREDS="duncan@159.89.232.237"
 	    PROJECT_LOC="duncannevin"

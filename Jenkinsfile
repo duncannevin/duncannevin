@@ -1,5 +1,9 @@
 pipeline {
-	agent any
+	agent {
+	    docker {
+	        'node:7-alpine'
+        }
+	}
 	environment {
 	    SERVER_CREDS="duncan@159.89.232.237"
 	    PROJECT_LOC="duncannevin"
@@ -15,7 +19,6 @@ pipeline {
 		    steps {
                 echo 'Configure env...'
                 sh '''
-                    nvm use 8
                     echo 'node -v'
                 '''
 		    }
@@ -31,14 +34,14 @@ pipeline {
 		stage('Start') {
 			steps {
 				echo 'Start...'
-		        sh '''
-		            ssh ${SERVER_CREDS} pm2 stop all
-		            ssh ${SERVER_CREDS} rm -rf ${PROJECT_LOC}
-		            ssh ${SERVER_CREDS} mkdir ${PROJECT_LOC}
-		            scp -r ./** ${SERVER_CREDS}:${PROJECT_LOC}
-		            ssh ${SERVER_CREDS} cd ${PROJECT_LOC};
-		            ssh ${SERVER_CREDS} pm2 start npm;
-		        '''
+// 		        sh '''
+// 		            ssh ${SERVER_CREDS} pm2 stop all
+// 		            ssh ${SERVER_CREDS} rm -rf ${PROJECT_LOC}
+// 		            ssh ${SERVER_CREDS} mkdir ${PROJECT_LOC}
+// 		            scp -r ./** ${SERVER_CREDS}:${PROJECT_LOC}
+// 		            ssh ${SERVER_CREDS} cd ${PROJECT_LOC};
+// 		            ssh ${SERVER_CREDS} pm2 start npm;
+// 		        '''
 			}
 		}
 	}

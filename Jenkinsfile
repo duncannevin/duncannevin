@@ -5,6 +5,7 @@ pipeline {
 	environment {
 	    SERVER_CREDS="duncan@159.89.232.237"
 	    PROJECT_LOC="duncannevin"
+	    HOME="."
 	}
 	stages {
 		stage('Checkout') {

@@ -32,14 +32,13 @@ pipeline {
 			steps {
 				echo 'Start...'
 		        sh '''
-		            ls
+		            ssh ${SERVER_CREDS} pm2 stop all
+		            ssh ${SERVER_CREDS} rm -rf ${PROJECT_LOC}
+		            ssh ${SERVER_CREDS} mkdir ${PROJECT_LOC}
+		            scp -r ./** ${SERVER_CREDS}:${PROJECT_LOC}
+		            ssh ${SERVER_CREDS} cd ${PROJECT_LOC};
+		            ssh ${SERVER_CREDS} pm2 start npm;
 		        '''
-// 		            ssh ${SERVER_CREDS} pm2 stop all
-// 		            ssh ${SERVER_CREDS} rm -rf ${PROJECT_LOC}
-// 		            ssh ${SERVER_CREDS} mkdir ${PROJECT_LOC}
-// 		            scp -r ./** ${SERVER_CREDS}:${PROJECT_LOC}
-// 		            ssh ${SERVER_CREDS} cd ${PROJECT_LOC};
-// 		            ssh ${SERVER_CREDS} pm2 start npm;
 			}
 		}
 	}

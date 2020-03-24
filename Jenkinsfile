@@ -16,7 +16,7 @@ pipeline {
 		    steps {
                 echo 'Configure env...'
                 sh '''
-                    echo 'node -v'
+                    node -v
                 '''
 		    }
 		}

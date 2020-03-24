@@ -2,7 +2,6 @@ pipeline {
 	agent any
 	tools { nodejs "node8" }
 	environment {
-	    SERVER_CREDS="duncan@159.89.232.237"
 	    PROJECT_LOC="duncannevin"
 	}
 	stages {
@@ -32,12 +31,12 @@ pipeline {
 			steps {
 				echo 'Start...'
 		        sh '''
-		            ssh ${SERVER_CREDS} pm2 stop all
-		            ssh ${SERVER_CREDS} rm -rf ${PROJECT_LOC}
-		            ssh ${SERVER_CREDS} mkdir ${PROJECT_LOC}
-		            scp -r ./** ${SERVER_CREDS}:${PROJECT_LOC}
-		            ssh ${SERVER_CREDS} cd ${PROJECT_LOC};
-		            ssh ${SERVER_CREDS} pm2 start npm;
+		            ssh ${DUNCAN_NEVIN} pm2 stop all
+		            ssh ${DUNCAN_NEVIN} rm -rf ${PROJECT_LOC}
+		            ssh ${DUNCAN_NEVIN} mkdir ${PROJECT_LOC}
+		            scp -r ./** ${DUNCAN_NEVIN}:${PROJECT_LOC}
+		            ssh ${DUNCAN_NEVIN} cd ${PROJECT_LOC};
+		            ssh ${DUNCAN_NEVIN} pm2 start npm;
 		        '''
 			}
 		}

@@ -1,11 +1,9 @@
 pipeline {
-	agent {
-        docker { image 'node:7-alpine' }
-    }
+	agent any
+	tools { nodejs "node8" }
 	environment {
 	    SERVER_CREDS="duncan@159.89.232.237"
 	    PROJECT_LOC="duncannevin"
-	    HOME="."
 	}
 	stages {
 		stage('Checkout') {
@@ -33,14 +31,15 @@ pipeline {
 		stage('Start') {
 			steps {
 				echo 'Start...'
-// 		        sh '''
+		        sh '''
+		            ls
+		        '''
 // 		            ssh ${SERVER_CREDS} pm2 stop all
 // 		            ssh ${SERVER_CREDS} rm -rf ${PROJECT_LOC}
 // 		            ssh ${SERVER_CREDS} mkdir ${PROJECT_LOC}
 // 		            scp -r ./** ${SERVER_CREDS}:${PROJECT_LOC}
 // 		            ssh ${SERVER_CREDS} cd ${PROJECT_LOC};
 // 		            ssh ${SERVER_CREDS} pm2 start npm;
-// 		        '''
 			}
 		}
 	}

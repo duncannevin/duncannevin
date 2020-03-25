@@ -1,3 +1,5 @@
+def duncanNevinBadge = addEmbeddableBadgeConfiguration(id: "duncannevin-build", subject: "Build")
+
 pipeline {
 	agent any
 	tools { nodejs "node8" }
@@ -45,5 +47,16 @@ pipeline {
 	    always {
 	        deleteDir()
 	    }
+	    success {
+	        script {
+                duncanNevinBadge.setStatus('passing')
+	        }
+        }
+        failure {
+            script {
+                duncanNevinBadge.setStatus('failing')
+                duncanNevinBadge.setColor('red')
+            }
+        }
 	}
 }

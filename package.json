@@ -2,6 +2,9 @@
   "name": "duncannevin.landing",
   "version": "0.0.0",
   "scripts": {
+    "cdk:deploy": "cdk deploy --app \"ts-node infrastructure/bin/infra.ts\"",
+    "cdk:diff": "cdk diff --app \"ts-node infrastructure/bin/infra.ts\"",
+    "cdk:synth": "cdk synth --app \"ts-node infrastructure/bin/infra.ts\" > GratitudeStack.template.yaml",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -29,12 +32,16 @@
     "@angular/cli": "^19.2.7",
     "@angular/compiler-cli": "^19.2.0",
     "@types/jasmine": "~5.1.0",
+    "aws-cdk-lib": "^2.212.0",
+    "constructs": "^10.4.2",
+    "dotenv": "^17.2.1",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.7.2"
   }
 }

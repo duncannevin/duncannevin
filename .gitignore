@@ -40,3 +40,11 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+/cdk.out
+*template.yaml
+cdk.*
+
+.env
+!.env.example
+/.vscode

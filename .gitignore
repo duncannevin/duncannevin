@@ -37,10 +37,14 @@ yarn-error.log
 testem.log
 /typings
 
+# Certs
+/certs/*.pem
+
 # System files
 .DS_Store
 Thumbs.db
 
+# CDK
 /cdk.out
 *template.yaml
 cdk.*

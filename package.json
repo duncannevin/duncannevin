@@ -2,14 +2,14 @@
   "name": "duncannevin.landing",
   "version": "0.0.0",
   "scripts": {
+    "ng": "ng",
+    "start": "make start",
+    "build": "ng build --configuration production --optimization",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
     "cdk:deploy": "cdk deploy --app \"ts-node infrastructure/bin/infra.ts\"",
     "cdk:diff": "cdk diff --app \"ts-node infrastructure/bin/infra.ts\"",
-    "cdk:synth": "cdk synth --app \"ts-node infrastructure/bin/infra.ts\" > GratitudeStack.template.yaml",
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "cdk:synth": "cdk synth --app \"ts-node infrastructure/bin/infra.ts\" > GratitudeStack.template.yaml"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
     "@tailwindcss/postcss": "^4.1.12",
+    "phoenix": "^1.8.0",
     "postcss": "^8.5.6",
     "rxjs": "~7.8.0",
     "tailwindcss": "^4.1.12",
@@ -32,6 +33,7 @@
     "@angular/cli": "^19.2.7",
     "@angular/compiler-cli": "^19.2.0",
     "@types/jasmine": "~5.1.0",
+    "@types/phoenix": "^1.6.6",
     "aws-cdk-lib": "^2.212.0",
     "constructs": "^10.4.2",
     "dotenv": "^17.2.1",

@@ -7,7 +7,8 @@ import {CommonModule} from '@angular/common';
     <nav class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
-          <div class="flex-shrink-0">
+          <div class="flex items-center flex-shrink-0">
+            <img src="/favicon-32x32.png" alt="Logo" class="h-6 w-6 inline-block mr-2"/>
             <h2 class="text-primary">Duncan Nevin</h2>
           </div>
 

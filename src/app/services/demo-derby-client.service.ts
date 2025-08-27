@@ -1,17 +1,15 @@
 import {Injectable, NgZone} from '@angular/core';
-import { Socket, Channel } from 'phoenix';
+import {Socket, Channel, ConnectionState} from 'phoenix';
 
 export interface DerbyPlayer {
   id: string;
-  name: string;
-  color: string;
   x: number;
   y: number;
+  w: number;
+  h: number;
   heading: number;
   health: number;
   speed: number;
-  w: number;
-  h: number;
 }
 
 export interface DerbySnapshot {
@@ -26,14 +24,23 @@ export class DemoDerbyClientService {
   private socket?: Socket;
   private channel?: Channel;
 
+  socketState: ConnectionState = 'connecting';
+
   constructor(private zone: NgZone) { }
 
   connectSocket(wsUrl: string, params?: Record<string, unknown>) {
     if (this.socket) return;
 
     this.zone.runOutsideAngular(() => {
-      this.socket = new Socket(wsUrl, {params});
+      this.socketState = 'connecting';
+      console.log('Connecting to', wsUrl, 'with params', params);
+      this.socket = new Socket(wsUrl, {params, reconnectAfterMs: (_tries) => Infinity});
       this.socket.connect();
+      this.socketState = this.socket.connectionState()
+      this.socket.onError((_err) => {
+        this.socket?.disconnect();
+        this.socketState = 'closed';
+      })
     });
   }
 

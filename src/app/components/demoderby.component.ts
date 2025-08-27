@@ -3,6 +3,13 @@ import {
 } from '@angular/core';
 import { DemoDerbyClientService, DerbyPlayer, DerbySnapshot } from '../services/demo-derby-client.service';
 
+// Add these global variables at the top of the file (or in a separate module)
+const blueCarSprite = new Image();
+blueCarSprite.src = 'bluecar.png';
+
+const brownCarSprite = new Image();
+brownCarSprite.src = 'browncar.png';
+
 @Component({
   selector: 'app-demoderby',
   template: `
@@ -158,24 +165,32 @@ function angleLerp(a: number, b: number, t: number) {
   let diff = ((b - a + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
   return a + diff * t;
 }
+
+// Replace the existing drawCar function with this updated version
 function drawCar(ctx: CanvasRenderingContext2D, p: DerbyPlayer, myId: string) {
   ctx.save();
   ctx.translate(p.x, p.y);
-  ctx.rotate(p.heading);
-  ctx.fillStyle = p.color as any;
-  ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-  ctx.fillStyle = 'white';
-  ctx.fillRect(p.w / 2 - 4, -3, 6, 6);
+  // Rotate car by heading + offset, so the top of the sprite points upward.
+  ctx.rotate(p.heading + Math.PI / 2);
+
+  // Use blue sprite for your car and brown sprite for others.
+  const sprite = p.id === myId ? blueCarSprite : brownCarSprite;
+  // Swap the dimensions: new width from original height and new height from original width, then increase by 20%.
+  const newW = p.h * 1.2;
+  const newH = p.w * 1.2;
+  // Draw the sprite centered at (0,0) with the swapped and increased dimensions.
+  ctx.drawImage(sprite, -newW / 2, -newH / 2, newW, newH);
   ctx.restore();
 
-  // health bar
+  // Draw health bar above the car.
   const hw = 30, hh = 4, hx = p.x - hw / 2, hy = p.y - p.h / 2 - 10;
   ctx.strokeRect(hx, hy, hw, hh);
   ctx.fillRect(hx, hy, hw * (p.health / 100), hh);
 
+  // Label your own car.
   if (p.id === myId) {
     ctx.font = '10px sans-serif';
-    ctx.fillText('You', p.x - 12, p.y + p.h / 2 + 12);
+    ctx.fillText('', p.x - 12, p.y + p.h / 2 + 12);
   }
 }
 

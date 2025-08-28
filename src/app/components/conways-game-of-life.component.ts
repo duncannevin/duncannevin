@@ -20,6 +20,7 @@ class CellMap extends Map<string, boolean> {
 
 class Grid {
   private cells = new CellMap();
+  generations = 0;
 
   constructor(private cols: number, private rows: number) {
     this.initializeCells();
@@ -173,6 +174,7 @@ class Grid {
       }
     });
 
+    this.generations++;
     this.cells = newCells;
   }
 }
@@ -192,24 +194,12 @@ class Grid {
         >
           {{ isPlaying ? 'Pause' : 'Play' }}
         </button>
-<!--        <button-->
-<!--          (click)="resetGrid()"-->
-<!--          class="bg-background/80 backdrop-blur-sm px-2 py-1 rounded"-->
-<!--        >-->
-<!--          Reset-->
-<!--        </button>-->
-<!--        <button-->
-<!--          (click)="randomizeGrid()"-->
-<!--          class="bg-background/80 backdrop-blur-sm px-2 py-1 rounded"-->
-<!--        >-->
-<!--          Randomize-->
-<!--        </button>-->
       </div>
 
       <!-- Generation counter -->
       <div class="absolute bottom-10 right-4 z-10">
         <div class="bg-background/80 backdrop-blur-sm px-3 py-1 rounded-md text-sm text-muted-foreground">
-          Generation: {{ generation }}
+          Generation: {{ grid.generations }}
         </div>
       </div>
 

@@ -1,13 +1,13 @@
 // File: src/app/components/about.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CardComponent, CardContentComponent} from './card.component';
-import {BypassHtmlSanitizerPipe} from '../pipes/bypass-html-sanitize.pipe';
+import {Card} from './card.component';
+import {LucideAngularModule, CodeIcon, LightbulbIcon, UsersIcon, TargetIcon} from 'lucide-angular';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [BypassHtmlSanitizerPipe, CardComponent, CardContentComponent, CommonModule],
+  imports: [Card, CommonModule, LucideAngularModule],
   styles: [``],
   template: `
     <section id="about" class="py-20 px-4 bg-background">
@@ -41,33 +41,36 @@ import {BypassHtmlSanitizerPipe} from '../pipes/bypass-html-sanitize.pipe';
             </p>
           </div>
 
-          <div class="relative h-full">
-            <app-card class="bg-gradient-to-br from-secondary/50 to-accent/50">
-              <app-card-content>
-                <h4 class="text-xl mt-4 mb-3 text-primary">Quick Facts</h4>
-                <ul class="mt-3 space-y-2 text-muted-foreground">
-                  <li>🎓 Computer Science Background</li>
-                  <li>💼 7+ Years of Development Experience</li>
-                  <li>🌍 Remote Work Enthusiast</li>
-                  <li>📚 Lifelong Learner</li>
-                  <li>☕ Coffee Powered Developer</li>
-                  <li>🎨 Design &amp; UX Enthusiast</li>
-                </ul>
-              </app-card-content>
-            </app-card>
-          </div>
+          <app-card class="bg-gradient-to-br from-secondary/50 to-accent/50 border-none">
+              <app-card-header>
+                <app-card-title>Quick Facts</app-card-title>
+              </app-card-header>
+
+            <app-card-content>
+              <app-card-bullets [items]="[
+                '🎓 Computer Science Background',
+                '💼 7+ Years of Development Experience',
+                '🌍 Remote Work Enthusiast',
+                '📚 Lifelong Learner',
+                '☕ Coffee Powered Developer',
+                '🎨 Design &amp; UX Enthusiast',
+              ]">
+              </app-card-bullets>
+            </app-card-content>
+          </app-card>
+
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="flex">
           <ng-container *ngFor="let value of values; index as i">
-            <app-card class="text-center hover:shadow-lg transition-shadow duration-300">
-              <app-card-content>
-                <div class="flex justify-center mt-6 mb-3 text-primary">
-                  <div [innerHTML]="value.icon | bypassHtmlSanitizer"></div>
+            <app-card class="mr-5">
+              <app-card-header>
+                <div class="flex justify-center mb-4 text-primary">
+                  <lucide-icon [img]="value.icon" name="house"></lucide-icon>
                 </div>
-                <h4 class="text-lg mb-3 mt-3 text-primary">{{ value.title }}</h4>
-                <p class="text-sm mt-3 text-muted-foreground">{{ value.description }}</p>
-              </app-card-content>
+                <app-card-title>{{ value.title }}</app-card-title>
+              </app-card-header>
+              <app-card-description>{{ value.description }}</app-card-description>
             </app-card>
           </ng-container>
         </div>
@@ -76,40 +79,25 @@ import {BypassHtmlSanitizerPipe} from '../pipes/bypass-html-sanitize.pipe';
   `
 })
 export class AboutComponent {
+
   values = [
     {
-      icon: `
-        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
-          <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
-        </svg>
-      `,
+      icon: CodeIcon,
       title: 'Clean Code',
       description: 'I believe in writing maintainable, efficient code that stands the test of time.'
     },
     {
-      icon: `
-        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
-          <path d="M12 2l2 7h7l-5.5 4 2 7-6-4-6 4 2-7L3 9h7l2-7z"/>
-        </svg>
-      `,
+      icon: LightbulbIcon,
       title: 'Innovation',
       description: 'Always exploring new technologies and approaches to solve complex problems.'
     },
     {
-      icon: `
-        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="10"/>
-        </svg>
-      `,
+      icon: UsersIcon,
       title: 'Collaboration',
       description: 'Strong communication skills and enjoy working in diverse, creative teams.'
     },
     {
-      icon: `
-        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
-          <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.59 5.58L20 12l-8-8z"/>
-        </svg>
-      `,
+      icon: TargetIcon,
       title: 'Results-Driven',
       description: 'Focused on delivering solutions that create real value for users and businesses.'
     }

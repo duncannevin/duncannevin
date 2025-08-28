@@ -1,19 +1,20 @@
 import {Component, HostBinding, Input} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-card',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div data-slot="card" [ngClass]="className">
-      <ng-content></ng-content>
-    </div>
+    <ng-content></ng-content>
   `
 })
 export class CardComponent {
-  @Input() className = '';
-  @HostBinding('class') hostClass = 'block h-full bg-card text-card-foreground flex flex-col gap-6 rounded-xl border';
+  @HostBinding('class') hostClass = 'flex flex-col grow-0 inline-block bg-background border border-neutral-200 rounded-xl p-5 sm:p-6';
+
+  @Input() set className(value: string) {
+    this.hostClass += ` ${value}`;
+  }
 }
 
 @Component({
@@ -21,15 +22,15 @@ export class CardComponent {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div
-      data-slot="card-header"
-      [ngClass]="'@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 pt-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 ' + className">
-      <ng-content></ng-content>
-    </div>
+    <ng-content></ng-content>
   `
 })
 export class CardHeaderComponent {
-  @Input() className = '';
+  @HostBinding('class') hostClass = 'grid gap-2';
+
+  @Input() set className(value: string) {
+    this.hostClass += ` ${value}`;
+  }
 }
 
 @Component({
@@ -37,13 +38,56 @@ export class CardHeaderComponent {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <h4 data-slot="card-title" [ngClass]="'leading-none ' + className">
-      <ng-content></ng-content>
-    </h4>
+    <ng-content></ng-content>
   `
 })
 export class CardTitleComponent {
-  @Input() className = '';
+  @HostBinding('class') hostClass = 'text-xl font-bold text-foreground m-0';
+
+  @Input() set className(value: string) {
+    this.hostClass += ` ${value}`;
+  }
+}
+
+@Component({
+  selector: 'app-card-link',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <a
+      [href]="href"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <ng-content></ng-content>
+      <span class="ml-1 text-sm" aria-hidden="true">↗</span>
+    </a>
+  `
+})
+export class CardLinkComponent {
+  @HostBinding('class') hostClass = 'font-semibold text-foreground border-b border-dashed border-neutral-300 hover:border-solid inline-flex items-center';
+  @Input() href = '#';
+
+  @Input() set className(value: string) {
+    this.hostClass += ` ${value}`;
+  }
+}
+
+@Component({
+  selector: 'app-card-icon-text',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <ng-content select="[card-icon]"></ng-content>
+    <ng-content select="[card-text]"></ng-content>
+  `
+})
+export class CardIconTextComponent {
+  @HostBinding('class') hostClass = 'inline-flex items-center gap-2';
+
+  @Input() set className(value: string) {
+    this.hostClass += ` ${value}`;
+  }
 }
 
 @Component({
@@ -51,13 +95,15 @@ export class CardTitleComponent {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <p data-slot="card-description" [ngClass]="'text-muted-foreground ' + className">
-      <ng-content></ng-content>
-    </p>
+    <ng-content></ng-content>
   `
 })
 export class CardDescriptionComponent {
-  @Input() className = '';
+  @HostBinding('class') hostClass = 'block mt-2 text-muted-foreground';
+
+  @Input() set className(value: string) {
+    this.hostClass += ` ${value}`;
+  }
 }
 
 @Component({
@@ -65,15 +111,40 @@ export class CardDescriptionComponent {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div
-      data-slot="card-action"
-      [ngClass]="'col-start-2 row-span-2 row-start-1 self-start justify-self-end ' + className">
-      <ng-content></ng-content>
-    </div>
+    <ng-content></ng-content>
   `
 })
 export class CardActionComponent {
-  @Input() className = '';
+  @HostBinding('class') hostClass = 'col-start-2 row-span-2 row-start-1 self-start justify-self-end';
+
+  @Input() set className(value: string) {
+    this.hostClass += ` ${value}`;
+  }
+}
+
+@Component({
+  selector: 'app-card-bullets',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <h4 class="text-sm font-bold text-muted-foreground mb-1">
+      <ng-content select="[card-bullets-title]"></ng-content>
+    </h4>
+    <ul class="list-disc pl-5 space-y-1">
+      <li *ngFor="let a of items" class="text-foreground">
+        {{ a }}
+      </li>
+    </ul>
+  `
+})
+export class CardBulletsComponent {
+  @HostBinding('class') hostClass = 'block mt-3';
+
+  @Input() items: string[] = [];
+
+  @Input() set className(value: string) {
+    this.hostClass += ` ${value}`;
+  }
 }
 
 @Component({
@@ -81,13 +152,15 @@ export class CardActionComponent {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div data-slot="card-content" [ngClass]="'px-6 [&:last-child]:pb-6 ' + className">
-      <ng-content></ng-content>
-    </div>
+    <ng-content></ng-content>
   `
 })
 export class CardContentComponent {
-  @Input() className = '';
+  @HostBinding('class') hostClass = 'block mt-3';
+
+  @Input() set className(value: string) {
+    this.hostClass += ` ${value}`;
+  }
 }
 
 @Component({
@@ -95,13 +168,26 @@ export class CardContentComponent {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div data-slot="card-footer" [ngClass]="'flex items-center px-6 pb-6 [.border-t]:pt-6 ' + className">
-      <ng-content></ng-content>
-    </div>
+    <ng-content></ng-content>
   `
 })
 export class CardFooterComponent {
-  @Input() className = '';
+  @HostBinding('class') hostClass = 'block mt-3';
+
+  @Input() set className(value: string) {
+    this.hostClass += ` ${value}`;
+  }
 }
 
-
+export const Card = [
+  CardComponent,
+  CardHeaderComponent,
+  CardTitleComponent,
+  CardLinkComponent,
+  CardDescriptionComponent,
+  CardActionComponent,
+  CardContentComponent,
+  CardFooterComponent,
+  CardIconTextComponent,
+  CardBulletsComponent,
+];

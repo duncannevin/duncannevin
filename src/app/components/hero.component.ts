@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ConwaysGameOfLifeComponent} from './conways-game-of-life.component';
 
@@ -6,7 +6,9 @@ import {ConwaysGameOfLifeComponent} from './conways-game-of-life.component';
   selector: 'app-hero',
   template: `
     <section class="relative mt-16 flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-secondary/20" style="height: calc(100vh - 40px);">
-      <app-conways-game-of-life></app-conways-game-of-life>
+      @if (!isPhone) {
+        <app-conways-game-of-life></app-conways-game-of-life>
+      }
 
       <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <div class="mb-8">
@@ -40,14 +42,14 @@ import {ConwaysGameOfLifeComponent} from './conways-game-of-life.component';
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <button
-            class="px-8 py-3 bg-black text-white cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            class="px-8 py-3 rounded-lg bg-primary text-primary-foreground cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50"
             (click)="scrollToSection('#projects')"
           >
             View My Work
           </button>
           <button
             (click)="scrollToSection('#contact')"
-            class="px-8 py-3 bg-white text-black cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            class="px-8 py-3 rounded-lg bg-secondary-600 text-secondary-foreground cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-secondary/40"
           >
             Get In Touch
           </button>
@@ -93,7 +95,24 @@ import {ConwaysGameOfLifeComponent} from './conways-game-of-life.component';
   imports: [CommonModule, ConwaysGameOfLifeComponent],
   standalone: true,
 })
-export class HeroComponent {
+export class HeroComponent implements OnInit, OnDestroy {
+  isPhone = false;
+  private mql: MediaQueryList | null = null;
+  private mqListener = () => {
+    if (this.mql) this.isPhone = this.mql.matches;
+  };
+
+  ngOnInit() {
+    if (typeof window !== 'undefined' && 'matchMedia' in window) {
+      this.mql = window.matchMedia('(max-width: 640px)');
+      this.isPhone = this.mql.matches;
+      this.mql.addEventListener?.('change', this.mqListener);
+    }
+  }
+
+  ngOnDestroy() {
+    this.mql?.removeEventListener?.('change', this.mqListener);
+  }
   scrollToSection(sectionId: string) {
     const element = document.querySelector(sectionId);
     if (element) {

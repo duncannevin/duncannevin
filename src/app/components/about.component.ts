@@ -58,12 +58,11 @@ import {LucideAngularModule, CodeIcon, LightbulbIcon, UsersIcon, TargetIcon} fro
               </app-card-bullets>
             </app-card-content>
           </app-card>
-
         </div>
 
-        <div class="flex">
+        <div class="flex flex-wrap justify-center">
           <ng-container *ngFor="let value of values; index as i">
-            <app-card class="mr-5">
+            <app-card class="mr-5 mb-5 w-60">
               <app-card-header>
                 <div class="flex justify-center mb-4 text-primary">
                   <lucide-icon [img]="value.icon" name="house"></lucide-icon>

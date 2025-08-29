@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ConwaysGameOfLifeComponent} from './conways-game-of-life.component';
+import {ButtonComponent} from './button.component';
 
 @Component({
   selector: 'app-hero',
@@ -41,18 +42,12 @@ import {ConwaysGameOfLifeComponent} from './conways-game-of-life.component';
         </div>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <button
-            class="px-8 py-3 rounded-lg bg-primary text-primary-foreground cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50"
-            (click)="scrollToSection('#projects')"
-          >
+          <app-button variant="primary" size="lg" href="#experience">
             View My Work
-          </button>
-          <button
-            (click)="scrollToSection('#contact')"
-            class="px-8 py-3 rounded-lg bg-secondary-600 text-secondary-foreground cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-secondary/40"
-          >
+          </app-button>
+          <app-button variant="secondary" size="lg" href="#contact">
             Get In Touch
-          </button>
+          </app-button>
         </div>
 
         <div class="relative">
@@ -92,7 +87,7 @@ import {ConwaysGameOfLifeComponent} from './conways-game-of-life.component';
     </section>
   `,
   styles: [],
-  imports: [CommonModule, ConwaysGameOfLifeComponent],
+  imports: [CommonModule, ConwaysGameOfLifeComponent, ButtonComponent],
   standalone: true,
 })
 export class HeroComponent implements OnInit, OnDestroy {
@@ -113,10 +108,5 @@ export class HeroComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.mql?.removeEventListener?.('change', this.mqListener);
   }
-  scrollToSection(sectionId: string) {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
+  // Smooth scrolling handled by ButtonComponent when href is a hash
 }

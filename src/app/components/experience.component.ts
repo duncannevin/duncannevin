@@ -14,13 +14,13 @@ import {TimelineComponent} from './timeline.component'; // replace with your act
     <section id="experience" class="py-20 px-4 bg-background">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-3xl sm:text-4xl mb-6 text-primary">Professional Experience</h2>
+          <h2 class="text-3xl sm:text-4xl mb-6 text-primary" id="experience">Professional Experience</h2>
           <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
             My journey in the tech industry, showcasing growth, impact, and the diverse projects I&apos;ve contributed to across different companies and roles.
           </p>
         </div>
+        <app-timeline [items]="experiences"></app-timeline>
       </div>
-      <app-timeline [items]="experiences"></app-timeline>
     </section>
   `,
   styles: [``]

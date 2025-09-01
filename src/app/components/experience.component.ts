@@ -90,7 +90,7 @@ export class ExperienceComponent {
         "Improved performance and scalability of customer-facing systems",
         "Collaborated with cross-functional teams in a remote-first environment"
       ],
-      technologies: ["AWS", "TypeScript", "Node.js"],
+      technologies: ["AWS", "Java", "Spring Boot", "Apigee"],
       companyUrl: "https://kohls.com"
     },
     {
@@ -106,7 +106,7 @@ export class ExperienceComponent {
         "Consulted clients on best practices for deploying modern SPAs",
         "Practiced TDD and worked with Protocol Buffers for typed service definitions"
       ],
-      technologies: ["Scala", "Angular", "TypeScript", "Protocol Buffers", "Dart"],
+      technologies: ["Kotlin", "Angular", "TypeScript", "Protocol Buffers", "Dart", "Angular-Dart"],
       companyUrl: "https://epam.com"
     },
     {
@@ -117,11 +117,12 @@ export class ExperienceComponent {
       type: "Full-time",
       description: "Built and maintained Angular-based user interfaces for enterprise ticketing and e-commerce platforms.",
       achievements: [
-        "Developed responsive UIs with Angular and RxJS",
+        "Developed responsive UIs with AngularJS",
         "Collaborated with backend engineers to integrate APIs",
-        "Enhanced performance and usability across multiple products"
+        "Enhanced performance and usability across multiple products",
+        "Maintained and made improvements to pipelines"
       ],
-      technologies: ["Angular", "Node.js", "RxJS", "TypeScript"],
+      technologies: ["AngularJS", "Node.js", "Javascript", "Groovy", "Jenkins"],
       companyUrl: "https://accesso.com"
     },
     {
@@ -137,7 +138,7 @@ export class ExperienceComponent {
         "Automated deployments using Node.js and Groovy",
         "Built frontend components with JavaScript"
       ],
-      technologies: ["PHP", "MySQL", "JavaScript", "Node.js", "Groovy", "AWS"],
+      technologies: ["PHP", "MySQL", "JavaScript", "Node.js", "AWS"],
       companyUrl: "https://juno.live"
     },
     {

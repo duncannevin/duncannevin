@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, HostListener, AfterViewInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, HostListener} from '@angular/core';
 
 class CellMap extends Map<string, boolean> {
   setCell(x: number, y: number, alive: boolean): this {
@@ -223,7 +223,7 @@ export class ConwaysGameOfLifeComponent implements OnInit {
   grid: Grid = new Grid(100, 100); // Default grid size
   animationFrameId!: number;
   lastUpdate = 0;
-  speed = 150; // milliseconds between generations
+  speed = 100; // milliseconds between generations
 
   @HostListener('window:resize')
   onResize() {
@@ -294,16 +294,14 @@ export class ConwaysGameOfLifeComponent implements OnInit {
 
     if (this.isPlaying) {
       this.startAnimation();
-    } else {
-      if (this.animationFrameId) {
-        cancelAnimationFrame(this.animationFrameId);
-      }
+    } else if (this.animationFrameId) {
+      clearTimeout(this.animationFrameId);
     }
   }
 
   startAnimation() {
     this.grid.nextGeneration();
     this.drawGrid(this.worldRef.nativeElement);
-    this.animationFrameId = requestAnimationFrame(() => this.startAnimation());
+    this.animationFrameId = setTimeout(() => this.startAnimation(), this.speed);
   }
 }
